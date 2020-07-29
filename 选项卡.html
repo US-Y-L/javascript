@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;padding:0;
+        }
+        #box{
+            width:400px;
+            height:400px;
+            border:1px solid #000;
+            margin: 50px auto;
+        }
+        #list{
+            display:flex;
+            list-style:none;
+            border-bottom:1px solid #000;
+            box-sizing:border-box
+        }
+        #list>li:not(:last-child){
+            border-right:1px solid #000;
+        }
+        #list li{
+            flex:1;
+            text-align:center;
+            line-height:30px;
+            box-sizing:border-box;
+            cursor:pointer;
+        }
+        .item{
+            height:370px;
+            display:none;
+        }
+        .active{
+            background-color:#bfa;
+            color:#fff;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <!-- 选项卡按钮 -->
+        <ul id="list">
+            <li class="active">食品</li>
+            <li>家电</li>
+            <li>服饰</li>
+            <li>运动</li>
+        </ul>
+        <!-- 各个板块 -->
+        <div class="item" style="display:block">食品板块</div>
+        <div class="item">家电板块</div>
+        <div class="item">服饰板块</div>
+        <div class="item">运动板块</div>
+    </div>
+    <script>
+        var lis = document.getElementsByTagName("li"); //4个
+        var items = document.getElementsByClassName("item"); //4个
+        for(var i = 0; i<lis.length; i++){
+            //给每个按钮添加索引
+            lis[i].index = i;
+
+            lis[i].onclick = function(){
+                //先清掉所有li的类名
+                for(var j=0; j<lis.length; j++){
+                    lis[j].className = "";
+                    items[j].style.display = "none";
+                }
+                //只有点击时才得到样式，点哪个哪个就有
+                this.className = "active";
+                //找到索引
+                console.log(this.index);
+
+                items[this.index].style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
