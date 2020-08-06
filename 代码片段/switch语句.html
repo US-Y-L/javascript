@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        /*switch语句语法：
+            switch(条件表达式){
+                case 表达式:  语句   break;
+                case 表达式:  语句   break;
+                case 表达式:  语句   break;
+                default:  语句  break;
+            }
+            case可根据情况写无数个
+        
+        */
+
+        //switch语句练习
+
+        /*  对于成绩大于60分的，输出"合格"。 低于60分的，输出"不合格"
+            
+            分别让他们都除以10
+            6x 表示六十几  /10 = 6
+            7x 表示七十几  /10 = 7
+            8x 表示八十几  /10 = 8
+            9x 表示九十几  /10 = 9
+            100 就是一百  /10 = 10
+        
+        */
+
+        var score = 60;
+
+        switch(parseInt(score/10)){
+            //表示传入的成绩为 60-100之间的数都可以，记住写法
+            case 10:
+            case 9:
+            case 8:
+            case 7:
+            case 6:
+                console.log("合格");
+                break;
+            default:
+                conosle.log("不合格");
+                break;
+        }
+
+        //方法二  JS中独有的，其他语言中不能这么写
+        var score1 = 69;
+        switch(true){
+            //判断是否为真，但是这样写完几乎和if..else..没什么区别
+            case score1 >=60:
+                console.log("合格的");
+                break;
+            default:
+                console.log("不合格");
+                break;
+        }
+
+    </script>
+</body>
+</html>
