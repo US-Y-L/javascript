@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        /*假如投资的年利率为5%，试求从1000元增长到5000元，需要花费多少年
+
+        1000  1000*1.05
+        1050  1050*1.05
+        
+        */
+
+        //定义一个变量，来表示当前的钱数
+
+        var money = 1000;
+
+        //定义一个计数器，统计循环执行的次数
+        var count = 0;
+
+        //定义一个while循环来计算每年的钱数
+
+        while(money < 5000){
+            money *= 1.05;
+
+            //使count自增，每循环一次就加一次
+            count++;
+        }
+
+        console.log("一共需要"+count+"年能达到5000元");
+    </script>
+</body>
+</html>
