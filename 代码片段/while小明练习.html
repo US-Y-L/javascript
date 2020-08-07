@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+        /*在弹出框中输入小明的成绩，根据成绩获得相应的奖励
+        
+        
+        */
+        
+        /*prompt()可以弹出一个提示框，该提示框中会带有一个文本框
+            用户可以在文本框中输入一段内容，给函数需要一个字符串作为参数
+            该字符串将会作为输入框的提示文字
+
+            用户输入的内容将会作为函数的返回值返回，可以定义一个变量来接受该内容
+        
+        */
+
+        
+
+        //将prompt()放入一个循环中
+        while(true){
+            //score就是小明的期末成绩
+            var score = +prompt("前请输入小明的期末成绩：");
+            //判断用户输入的值是否合法
+            if(score >= 0 && score <= 100){
+                //满足该条件说明用户输入的内容合法，使用break退出循环
+                break;
+            }
+            alert("请输入有效的分数");
+        }
+
+        //首先判断成绩是否在 0-100 之间
+
+        if(score > 100 || score < 0 || isNaN(score)){
+            alert("请重新输入")
+        }else{
+                if(score === 100){
+                alert("奖励宝马一辆");
+            }else if(score >=80 && score <100){
+                    alert("奖励一部iphone15s");
+            }else if(score >= 60 && score < 80){
+                    alert("奖励一本参考书");
+            }else{
+                alert("奖励混合双打一套");
+            }
+        }
+
+        
+    </script>
+</body>
+</html>
