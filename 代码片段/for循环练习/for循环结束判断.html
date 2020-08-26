@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+
+        //判断循环的依据以分号前最后一项条件为准
+
+        //以j<6为判断循环结束基准
+        for(var i=0, j = 0; i<10,j<6;i++,j++){
+            sum = i + j;
+        }
+        console.log(sum); //结果为10
+
+        //以j<10为判断循环结束基准
+        for(var i =0,j =0; i<6,j<10;i++,j++){
+            sum1 = i + j;
+        }
+        console.log(sum1);  //结果为18
+    </script>
+</body>
+</html>
