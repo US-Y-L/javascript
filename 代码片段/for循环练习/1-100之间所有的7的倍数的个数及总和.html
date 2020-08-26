@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7的倍数的个数及总和</title>
+
+</head>
+<body>
+    <script>
+        var sum = 0;
+        var count = 0;
+        for(var i = 0; i<= 100; i++){
+            if(i % 7 == 0){
+                count++;
+                sum+=i;
+            }
+            
+        }
+        console.log("共有："+count+"个7的倍数");
+        console.log("总和为："+sum);
+    </script>
+</body>
+</html>
