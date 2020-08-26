@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        //求阶乘的和1！+2！+3！+4！+...+N！
+
+        //阶乘的算法思路，永远阶乘*N；外部for每循环一次，result都会重新赋值1，
+        //　所以factorial的值永远都是：factorial（y-1）*y
+        //求阶乘的和：阶乘的和+下一个阶乘
+
+        var num = prompt("输入");
+        var sum = 0;
+        for( var x = 1; x<= num; x++){
+            var result = 1;
+            for(var y =1;y<= x;y++){
+                result *= y;
+            }
+            sum += result;
+        }
+        alert(sum);
+    </script>
+</body>
+</html>
