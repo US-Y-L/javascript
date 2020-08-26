@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border-collapse:collapse;
+        }
+        tr,td{
+            border:1px solid #000;
+        }
+        td{
+            padding:0 4px;
+        }
+        span{
+            display:inline-block;
+            width:88px;
+            line-height:20px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        for(var i = 0;i<6;i++){
+            for(var j=0;j<6-i;j++){
+                document.write("*"+"&nbsp;");
+            }
+            document.write("<br/>")
+        }
+        for(var i = 0;i<6;i++){
+            for(var j=0;j<i+1;j++){
+                document.write("*&nbsp;");
+            }
+            document.write("<br/>")
+        }
+        //for循环写九九乘法表
+        document.write("<table>")
+        for(var i=1;i<=10;i++){
+            document.write("<tr>")
+            for(var j=1;j<=i;j++){
+                document.write("<td>" +j +"x"+ i+ "=" + j *i + "</td>")
+            }
+            document.write("</tr>")
+        }
+        document.write("</table>")
+
+        //九九乘法表新（不用table）
+        //i的值决定多少行
+        for(var i = 1;i<=9 ;i++){
+            //j的值决定多少列
+            for(var j = 1;j<=i;j++){
+                document.write("<span>"+j+"x"+i + "="+j*i+"</span>");
+            }
+            document.write("<br/>")
+        }
+    </script>
+</body>
+</html>
