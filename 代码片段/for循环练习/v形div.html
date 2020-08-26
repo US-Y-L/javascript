@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrap{
+            position:relative;
+        }
+        .box{
+            position:absolute;
+            left:0;
+            top:0;
+            width:50px;
+            height:50px;
+            background:#bfa;
+            font:20px/50px "微软雅黑";
+            color:purple;
+            text-align:center;
+        }
+    </style>
+
+    <script>
+        window.onload = function(){
+            var ipt = document.getElementById("ipt");
+            var btn = document.getElementById("btn");
+            var wrap = document.getElementById("wrap");
+
+            btn.onclick = function(){
+                //先清空wrap原有的小方块
+                wrap.innerHTML = "";
+                var num = +ipt.value;
+
+                for(var i = 0; i < num ; i++){
+                    //进行判断，左边的部分left 、top值都增加
+                    if(i < (num /2) ){
+                        wrap.innerHTML += "<div class = 'box' style='left:"+50 * i +"px;top:"+50 * i  +"px'>"+ (i +1) +"</div>";
+                    }else{
+                        //右边的部分left增加，top值减小
+                        wrap.innerHTML += "<div class = 'box' style= 'left:"+50 * i  +"px;top:"+ (num - i - 1) * 50 +"px'>" + (i + 1)+"</div>"
+                        
+                        console.log(i);
+                    }1
+                }
+                
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="ipt">
+    <button id="btn">show</button>
+    <div id="wrap"></div>
+
+    
+</body>
+</html>
