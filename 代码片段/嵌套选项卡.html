@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选项卡</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #wrap{
+            width:500px;
+            height:300px;
+            border:1px solid #ccc;
+            margin:30px 0 0 30px;
+        }
+        #left{
+            width:100px;
+            height:300px;
+            list-style:none;
+            float:left;
+        }
+        #left li{
+            width:100px;
+            height:75px;
+            text-align:center;
+            font:20px/75px "微软雅黑";
+            background:#bfa;
+            cursor:pointer;
+        }
+        #left>li:not(:last-of-type){
+            border-bottom:azure 1px solid;
+        }
+        #left>.on{
+            background:purple;
+            color:#fff;
+        }
+        #wrap div{
+            width:400px;
+            height:300px;
+            position:relative;
+            background:beige;
+            float:left;
+            /* background:rgb(64, 13, 112); */
+            font:30px/300px "微软雅黑";
+            text-align:center;
+            display:none;
+        }
+        #wrap div:first-of-type{
+            background:rgb(71, 29, 110);
+        }
+        #wrap div:nth-of-type(2){
+            background:rgb(139, 87, 187);
+        }
+        #wrap div:nth-of-type(3){
+            background:rgb(108, 99, 117);
+        }
+        #wrap div:last-of-type{
+            background:rgb(88, 87, 90);
+        }
+        #wrap div ul{
+            list-style:none;
+            position:absolute;
+            left:0;
+            bottom:0;
+            display:flex;
+            width:400px;
+            height:40px;
+        }
+        #wrap div li{
+            flex:1;
+            background:darkgreen;
+            font:18px/40px "微软雅黑";
+            text-align:center;
+            cursor:pointer;
+        }
+        #wrap div ul li:not(:last-of-type){
+            border-right:1px solid #ccc;
+        }
+        #wrap div .on{
+            background:cornflowerblue;
+            color:#fff;
+        }
+    </style>
+    <script>
+
+        window.onload = function(){
+            var oWrap = document.getElementById("wrap");
+            var left = document.getElementById("left");
+            var aLi = left.getElementsByTagName("li");
+            var aBox = oWrap.getElementsByTagName("div");
+
+            for(var i = 0; i < aBox.length; i++){
+                fn(aBox[i]);
+            }
+
+            function fn(aBoxx){
+                var oUl  =aBoxx.getElementsByTagName("ul")[0];
+                var aLi1 = aBoxx.getElementsByTagName("li");
+                var ops=aBoxx.getElementsByTagName("p")[0];
+                //左边选项卡
+                for(var i = 0 ; i < aLi.length ; i++){
+                    aLi[i].index = i;
+                    aLi[i].onmouseenter = function(){
+                        for(var i = 0 ;i < aLi.length; i++){
+                            aLi[i].className = "";
+                            aBox[i].style.display = "none";
+                        }
+                        this.className = "on";
+                        aBox[this.index].style.display = "block";
+                    }
+                }
+
+                //下边小的选项卡
+                aLi1[0].className = "on";
+                for(var i =0 ;i < aLi1.length; i++){
+                    aLi1[i].index = i;
+                    aLi1[i].onmouseenter = function(){
+                        for(var i = 0; i< aLi1.length; i++){
+                            aLi1[i].className = "";
+                        }
+                        
+                        this.className = "on";
+                        console.log(ops,this)
+                        ops.innerHTML=this.innerHTML;
+                    }
+                }
+                console.log(aLi1.length);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="wrap">
+        <ul id="left">
+            <li class="on">左1</li>
+            <li>左2</li>
+            <li>左3</li>
+            <li>左4</li>
+        </ul>
+        <div style="display:block">
+            <p></p>
+            <ul>
+                <li class="on">选项1</li>
+                <li>选项2</li>
+                <li>选项3</li>
+                <li>选项4</li>
+            </ul>
+        </div>
+        <div>
+            <p></p>
+            <ul>
+                <li>选项1</li>
+                <li>选项2</li>
+                <li>选项3</li>
+                <li>选项4</li>
+            </ul>
+        </div>
+        <div>
+            <p></p>
+            <ul>
+                <li>选项1</li>
+                <li>选项2</li>
+                <li>选项3</li>
+                <li>选项4</li>
+            </ul>
+        </div>
+        <div>
+            <p></p>
+            <ul>
+                <li>选项1</li>
+                <li>选项2</li>
+                <li>选项3</li>
+                <li>选项4</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
