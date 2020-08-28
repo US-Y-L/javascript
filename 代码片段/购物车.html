@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物车加减</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            font-style:normal;
+        }
+        button{
+            /* padding:0 5px; */
+            width:22px;
+            height:22px;
+        }
+        #list{
+            margin-left:20px;
+            margin-top:20px;
+            list-style:none;
+        }
+
+
+
+    </style>
+    <script>
+        window.onload = function(){
+            var aLi = document.getElementById("list").getElementsByTagName("li");
+            var title = document.getElementById("title");
+            var ge = title.getElementsByTagName("span")[0];
+            var money = title.getElementsByTagName("span")[1];
+           
+            function calc(aLi){
+                
+                var reduce = aLi.getElementsByTagName("button")[0];
+                var add = aLi.getElementsByTagName("button")[1];
+                var oSpan = aLi.getElementsByTagName("span")[0];
+                var oEm = aLi.getElementsByTagName("em")[0];
+                var oI = aLi.getElementsByTagName("i")[0];
+
+                //加
+                add.onclick = function(){
+                    var num = +oSpan.innerHTML;
+                    num++;
+                    oSpan.innerHTML = num;
+                    oI.innerHTML = num * (+oEm.innerHTML).toFixed(2);
+                    
+                   ge.innerHTML=sumCount();
+                   
+                   money.innerHTML = sumPrice();
+                    
+                    
+                }
+                //减
+                reduce.onclick = function(){
+                    var num = +oSpan.innerHTML;
+                    num--;
+                    if(num < 0 ){
+                        return;
+                    }
+                    oSpan.innerHTML = num;
+                    oI.innerHTML = num * (+oEm.innerHTML).toFixed(2);
+                    ge.innerHTML=sumCount();
+                    money.innerHTML = sumPrice();
+                }
+
+                
+             
+             
+
+            }
+            //计算总数
+            function sumCount(){
+                       var count = 0;
+                    for(var i = 0; i < aLi.length ; i++){
+                        count += parseInt(aLi[i].getElementsByTagName("span")[0].innerHTML);
+                        
+                    }
+                    
+                    return count;
+                }
+
+            //计算总价
+            function sumPrice(){
+                var count = 0;
+                for(var i = 0 ; i< aLi.length;i++){
+                    count += parseFloat(aLi[i].getElementsByTagName("i")[0].innerHTML)
+                }
+                return count;
+            }
+
+
+            for(var i = 0; i < aLi.length ; i++){
+                calc(aLi[i]);
+            }
+        }
+    </script>
+
+</head>
+<body>
+    <ul id="list">
+        <li>
+            <button>-</button>
+            <span>0</span>
+            <button>+</button>
+            单价：
+            <em>12.5</em>
+            元；小计：
+            <i>0.00</i>
+            元
+        </li>
+        <li>
+            <button>-</button>
+            <span>0</span>
+            <button>+</button>
+            单价：
+            <em>28.8</em>
+            元；小计：
+            <i>0.00</i>
+            元
+        </li>
+        <li>
+            <button>-</button>
+            <span>0</span>
+            <button>+</button>
+            单价：
+            <em>3.5</em>
+            元；小计：
+            <i>0.00</i>
+            元
+        </li>
+        <li>
+            <button>-</button>
+            <span>0</span>
+            <button>+</button>
+            单价：
+            <em>210</em>
+            元；小计：
+            <i>0.00</i>
+            元
+        </li>
+        <li>
+            <button>-</button>
+            <span>0</span>
+            <button>+</button>
+            单价：
+            <em>83</em>
+            元；小计：
+            <i>0.00</i>
+            元
+        </li>
+    </ul>
+    <p id="title" style="margin-left:20px;margin-top:10px;">
+        共：<span>0</span>件；
+        共：<span>0</span>元
+    </p>
+</body>
+</html>
