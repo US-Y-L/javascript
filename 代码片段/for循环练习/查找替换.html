@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrap{
+            width:800px;
+            border:1px solid #ccc;
+
+        }
+        .btnbox{
+            border-bottom:1px solid #ccc;
+            padding-top:20px;
+            padding-bottom:20px;
+            padding-right:20px;
+
+            /* 按钮再盒子里右对齐 */
+            text-align:right;
+        }
+        .btnbox input{
+            width:90px;
+            height:34px;
+
+            border:0;
+            background-color:#ccc;
+            color:#fff;
+            /* 清除获取焦点时的蓝框 */
+            outline:none;
+
+            cursor:pointer;
+
+        }
+        /* active负责点击之后的样式 */
+        .btnbox .active{
+            background-color:red;
+
+        }
+        .searchbox{
+            margin-top:10px;
+            text-align:right;
+            /* background-color:blueviolet; */
+
+            /* 作为参照物 */
+            position:relative;
+            height:34px;
+        }
+        .searchbox div{
+            /* padding-right:20px; */
+            /* width:100%; */
+            /* 相对于searchbox移动 */
+            position:absolute;
+            right:20px;
+            top:0;
+            background-color:#fff;
+            /* 缩放为0 */
+            transform: scale(0);
+            /* 当发生缩放时，使缩放的过程持续0.5s */
+            transition:0.5s;
+            /* 设定一个方向为缩放的基点 */
+            transform-origin:right;
+        }
+        /* 谁是显示的，谁加一.show */
+        .searchbox .show{
+            transform:scale(1);
+        }
+        .ipt{
+            /* 清除默认内边距 */
+            padding:0;
+
+            width:200px;
+            height:32px;
+            border:1px solid #ccc;
+            /* placeholder里的文字缩进 往后走10px */
+            text-indent:10px;
+
+        }
+        .btn{
+            /* 清除默认边框 */
+            border:0;
+            width:90px;
+            height:34px;
+            background-color:#ccf;
+            color:#fff;
+
+
+        }
+        .cont{
+            padding:20px;
+
+            line-height:30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="btnbox" id="btnsbox">
+            <input type="button" value="查找" class="active">
+            <input type="button" value="替换">
+        </div>
+        <div class="searchbox" id="shbox">
+            <div class="show">
+                <input type="text" placeholder="输入查找内容" class="ipt" id="czIpt"> <input type="button" value="查找" class="btn" id="czBtn">
+            </div>
+            <div>
+                <input type="text" class="ipt" placeholder="输入查找内容" id="czIpt2"> <input type="text" class="ipt" placeholder="输入替换内容" id="thIpt"> <input type="button" value="替换" class="btn" id="thBtn">
+            </div>
+        </div>
+        <div class="cont">
+                        一步两步三步四步望着天手牵手一颗两颗三颗四颗连成线看星星一步两步三步四步望着天手牵手一颗两颗三颗四颗连成线看星
+            乘着风游荡在蓝天边一片云掉落在我面前捏成你的形状随风跟着我一口一口吃掉忧载着你仿佛载着阳光不管到哪里都是晴天蝴蝶自在飞花也布满天一朵一朵因你而香夕阳飞翔带领你我环绕大自然迎着风开始共度每一天手牵手一步两步三步四步望着天看星星一颗两颗三颗四颗连成线背对背默默许下心愿看远方的星是否听的见手牵手一步两步三步四步望着天看星星一颗两颗三颗四颗连成线背对背默默许下心愿看远方的星如果听的见它一定实现载着你仿佛载着阳光不管到哪里都是晴天蝴蝶自在飞花也布满天一朵一朵因你而香试图让夕阳飞翔带领你我环绕大自然迎着风开始共度每一天手牵手一步两步三步四步望着天看星星一颗两颗三颗四颗连成线背对背默默许下心愿看远方的星是否听的见手牵手一步两步三步四步望着天看星星一颗两颗三颗四颗连成线背对背默默许下心看远方的星如果听的见它一定实现
+ 
+        </div>
+    </div>
+    <script>
+        // 找到查找和替换按钮
+        var btnsbox = document.getElementById("btnsbox");
+        var btns = btnsbox.getElementsByTagName("input");
+
+        // 搜索框及里面的两个div
+        var shbox = document.getElementById("shbox");
+        var shdiv = shbox.getElementsByTagName("div");
+
+        console.log(btns);
+        console.log(shdiv);
+
+        for(var i=0;i<btns.length;i++){
+            // 给每一个btn添加一个自定义属性去标识序号
+            btns[i].index = i;
+
+            btns[i].onclick = function(){
+                // 给当前添加之前，先清除所有
+                    // 先将所有的都隐藏
+                    for(var j=0;j<btns.length;j++){
+                        btns[j].className ="";
+                        shdiv[j].className = "";
+                    }
+                    // 排它思想,使当前按钮中只有一个是红色
+                    this.className = "active";
+                    // 显示，当前这个div之前
+                    shdiv[this.index].className = "show";
+
+            }
+        }
+
+        var czIpt = document.getElementById("czIpt");
+        var czBtn = document.getElementById("czBtn");
+
+        var cont = document.getElementsByClassName("cont")[0];
+        // 定义所有的文字内容
+        var str = cont.innerHTML;
+        console.log(str);
+
+        czBtn.onclick = function(){
+            if(czIpt.value==""){
+                alert("请输入查找的内容");
+
+            }else if(str.indexOf(czIpt.value)==-1){
+                alert("没有该内容，请重新输入");
+
+            }else{
+                // 将内容移【查找的内容】为分隔符，切割为几个部分（数组）
+                var rsArray = str.split(czIpt.value);
+                console.log(rsArray);
+                // 重新通过数组的方法，连接起来，同时加入<span></span>
+                var newStr = rsArray.join("<span style='background-color:yellow'>"+czIpt.value+"</span>");
+                console.log(newStr);
+                // 重新放入盒子
+                cont.innerHTML = newStr;
+
+            }
+            // 清空输入框
+            czIpt.value="";
+        }
+
+        /* 点击查找按钮时，整个内容块里找到czIpt的内容
+            点击替换按钮，整个内容块找到czIpt的内容，并替换成czIpt2中的内容
+        */
+        // 找到输入框
+        var czIpt2 = document.getElementById("czIpt2");
+        // 替换内容的输入框
+        var thIpt = document.getElementById("thIpt");
+
+        // 替换按钮
+        var thBtn = document.getElementById("thBtn");
+
+        thBtn.onclick = function(){
+            if(czIpt2.value==""){
+                alert("请输入查找的内容");
+            }
+            else if(str.indexOf(czIpt2.value)==-1){
+                alert("查找不到，请重新输入");
+            }else{
+                var strArray = str.split(czIpt2.value);
+
+                var newStr = strArray.join("<span style='background-color:red'>"+thIpt.value+"</span>");
+
+                cont.innerHTML = newStr;
+            }
+            czIpt2.value="";
+            thIpt.value="";
+        }
+    </script>
+</body>
+</html>
