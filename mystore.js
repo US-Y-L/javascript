@@ -43,3 +43,57 @@ function getRandom(max,min){
 function double(num){
     return num >= 10 ? ""+num : "0"+num;
 }
+
+//封装一个事件绑定函数
+function bindEvent(ele,oEvent,fn){
+    if(ele.addEventListener){
+        ele.addEventListener(oEvent,fn,false);
+    }else{
+        ele.attachEvent("on" + oEvent,fn)
+    }
+}
+
+//取消事件绑定的函数
+//@params : ele,要取消绑定事件的元素  oEvent,事件，不带on  fn,要取消绑定的事件处理函数
+function removeEvent(ele,oEvent,fn){
+    if(ele.removeEventListener){
+        ele.removeEventListener(oEvent,fn,false);
+    }else{
+        ele.detachEvent("on" + oEvent , fn);
+    }
+}
+
+//随机n位验证码
+function checkCode(n){
+    var str = "0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+    var code = "";
+    for(var i = 0; i< n; i++){
+        code += str.charAt(random(str.length - 1 , 0));
+    }
+    return code;
+}
+
+
+//创建元素的函数
+function setEle(tar,inner){
+    if(!inner){
+        inner = "";
+    }
+    var ele = document.createElement(tar);
+    tar.innerHTML = inner;
+    return ele;
+}
+
+
+
+
+//如果想要获取嵌套在最里面的节点的offsetTop,假如嵌套很多难以计算
+        //封装一个函数用来获取到任意节点的offsetTop值
+        function getTop(ele){
+            var iTop = 0;
+            while(ele.offsetTop){
+                iTop += ele.offsetTop;
+                ele = ele.offsetParent;
+            }
+            return iTop;
+        }
