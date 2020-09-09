@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #box{
+            width:100px;
+            height:100px;
+            background:red;
+            position: absolute;
+            left:0;
+            top:0;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+
+            // var box = document.getElementById("box");
+
+            // box.onmousedown = function(ev){
+            //     var ev = event || ev;
+            //     var mL = ev.clientX - box.offsetLeft;
+            //     var mT = ev.clientY - box.offsetTop;
+
+            //     document.onmousemove = function(ev){
+            //         var l = ev.clientX - mL;
+            //         var t = ev.clientY - mT;
+
+            //         box.style.left=l+'px';
+            //         box.style.top=t+'px';
+            //     }
+            //     document.onmouseup = function(){
+            //         document.onmouseup=null;
+            //         document.onmousemove=null;
+            //     }
+            // }
+
+            var box = new Box("box");
+            
+        }
+        function Box(id){
+            this.box = document.getElementById(id);
+            var that = this;
+            this.box.onmousedown = function(ev){
+                that.down(ev);
+                
+            }
+            
+        }
+
+        Box.prototype.down = function(ev){
+            var that = this;
+            var ev = ev || event;
+            this.disX = ev.clientX - this.box.offsetLeft;
+            this.disY = ev.clientY - this.box.offsetTop;
+
+            this.box.style.background = "darkorange";
+            
+            document.onmousemove = function(ev){
+                that.move(ev);
+                
+            }
+            document.onmouseup = function( ){
+                that.leave();
+            }
+
+        }
+
+        Box.prototype.move = function(ev){
+            var ev = event || ev;
+            
+            var l = ev.clientX - this.disX;
+            var t = ev.clientY - this.disY;
+            // console.log(this.disX);
+            if(l <= 0){
+                l = 0;
+            }else if(l >= document.documentElement.clientWidth - this.box.offsetWidth){
+                l = document.documentElement.clientWidth - this.box.offsetWidth;
+            }
+            if(t <= 0){
+                t = 0;
+            }else if( t >= document.documentElement.clientHeight - this.box.offsetHeight){
+                t = document.documentElement.clientHeight - this.box.offsetHeight
+            }
+            this.box.style.background = "blue";
+
+            this.box.style.left = l +"px";
+            this.box.style.top = t +"px";
+        }
+        Box.prototype.leave = function(){
+            this.box.style.background = "red";
+            document.onmousemove = null;
+            document.onmouseup = null;
+        }
+    </script>
+</head>
+<body>
+    <div id="box"></div>
+</body>
+</html>
