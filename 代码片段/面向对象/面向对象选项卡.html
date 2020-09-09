@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #tab ,#tab1{
+            width: 300px;
+            height: 300px;
+            margin: 100px auto 0;
+            /* border:1px solid #000; */
+        }
+
+        #tab div ,#tab1 div{
+            width: 300px;
+            height: 270px;
+            box-sizing: border-box;
+            padding: 10px;
+            border: 1px solid #000;
+            display: none;
+        }
+
+        #tab .on ,#tab1 .on{
+            background: yellow;
+        }
+    </style>
+
+    <script>
+        window.onload = function () {
+            var tab = new Tab("tab");
+            var tab1 = new Tab("tab1");
+        }
+
+        // function Tab(id) {
+        //     this.oTab = document.getElementById(id);
+        //     this.aBtn = this.oTab.getElementsByTagName("button");
+        //     this.aDiv = this.oTab.getElementsByTagName("div");
+        //     this.inint();
+        // }
+
+        // Tab.prototype.inint = function () {
+        //     var that = this;
+        //     for (var i = 0; i < this.aBtn.length; i++) {
+        //         this.aBtn[i].index = i;
+        //         this.aBtn[i].onclick = function () {
+        //             that.fnClick(this);
+        //         }
+        //     }
+        // }
+
+        // Tab.prototype.fnClick = function (btn) {
+        //     for (var i = 0; i < this.aBtn.length; i++) {
+        //         this.aDiv[i].style.display = "none";
+        //         this.aBtn[i].className = "";
+        //     }
+        //     btn.className = "on";
+        //     this.aDiv[btn.index].style.display = "block";
+        // }
+
+        //--------------------------------------------------------------------------------------
+        // function Tab(id){
+        //     this.oTab = document.getElementById(id);
+        //     this.aBtn = this.oTab.getElementsByTagName("button");
+        //     this.aDiv = this.oTab.getElementsByTagName("div");
+        //     this.inint();
+        // }
+
+        // Tab.prototype.inint = function(){
+        //     var that = this;
+        //     for(var i = 0; i< this.aBtn.length ; i++){
+        //         this.aBtn[i].index = i;
+        //         this.aBtn[i].onclick = function(){
+        //             that.fnClick(this);
+        //         }
+        //     }
+        // }
+        // Tab.prototype.fnClick = function(btn){
+        //     for(var i = 0; i < this.aBtn.length ; i++){
+        //         this.aBtn[i].className = "";
+        //         this.aDiv[i].style.display = "none";
+        //     }
+        //     btn.className = "on";
+        //     this.aDiv[btn.index].style.display = "block";
+        // }
+        
+        //--------------------------------------------------------------------------------------------
+        // function Tab(id){
+        //     this.oTab = document.getElementById(id);
+        //     this.aBtn = this.oTab.getElementsByTagName("button");
+        //     this.aDiv = this.oTab.getElementsByTagName("div");
+        //     this.inint();
+        // }
+
+        // Tab.prototype.inint = function(){
+        //     var that = this;
+        //     for(var i = 0; i<this.aBtn.length ; i++){
+        //         this.aBtn[i].index = i;
+        //         this.aBtn[i].onclick = function(){
+        //             that.fnClick(this);
+        //         }
+        //     }
+        // }
+
+        // Tab.prototype.fnClick = function(btn){
+        //     for(var i = 0; i< this.aBtn.length ; i++){
+        //         this.aBtn[i].className = "";
+        //         this.aDiv[i].style.display = "none";
+        //     }
+        //     btn.className = "on";
+        //     this.aDiv[btn.index].style.display = "block";
+        // }
+
+        //-----------------------------------------------------------------------------------
+        function Tab(id){
+            this.oTab = document.getElementById(id);
+            this.aBtn = this.oTab.getElementsByTagName("button");
+            this.aDiv = this.oTab.getElementsByTagName("div");
+            this.inint()
+        }
+
+        Tab.prototype.inint = function(){
+            var that = this;
+            for(var i = 0; i< this.aBtn.length ; i++){
+                this.aBtn[i].index = i;
+                this.aBtn[i].onclick = function(){
+                    that.fnClick(this);
+                }
+            }
+        }
+        Tab.prototype.fnClick = function(btn){
+            for(var i = 0; i< this.aBtn.length ; i++){
+                this.aBtn[i].className = "";
+                this.aDiv[i].style.display = "none";
+            }
+            this.aDiv[btn.index].style.display = "block";
+            btn.className = "on";
+        }
+    </script>
+</head>
+
+<body>
+    <div id="tab">
+        <button class="on">选项1</button>
+        <button>选项2</button>
+        <button>选项3</button>
+        <div style="display:block">1111111111</div>
+        <div>2222222222</div>
+        <div>33333333333</div>
+    </div>
+
+    <div id="tab1">
+        <button class="on">选项1</button>
+        <button>选项2</button>
+        <button>选项3</button>
+        <button>选项4</button>
+        <button>选项5</button>
+        <div style = "display:block">0000000000001</div>
+        <div>0000000000002</div>
+        <div>0000000000003</div>
+        <div>0000000000004</div>
+        <div>0000000000005</div>
+    </div>
+
+</body>
+
+</html>
