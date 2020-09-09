@@ -97,3 +97,43 @@ function setEle(tar,inner){
             }
             return iTop;
         }
+
+//缓动框架
+function getStyle(el,attr){
+    return el.currentStyle ? el.currentStyle[attr] : getComputedStyle(el)[attr];
+}
+
+var timer = null
+function bufferMove(el,json,fn){
+    clearInterval(el.timer);
+    el.timer = setInterval(function(){
+        var flag = true;
+
+        for(var attr in json){
+            if(attr == "opacity"){
+                var cur = Math.round(getStyle(el,attr) * 100);
+            }else{
+                var cur = parseInt(getStyle(el,attr));
+            }
+
+            var speed = (json[attr] - cur) / 10;
+            speed = speed >0 ? Math.ceil(speed) : Math.floor(speed);
+
+            if(cur != json[attr]){
+                flag = false;
+            }
+
+            if(attr == "opacity"){
+                el.style.opacity = (cur + speed) / 100;
+                el.style.filter = "alpha (opacity = " + (cur + speed) + ")";
+            }else{
+                el.style[attr] = cur + speed +"px";
+            }
+        }
+        if(flag){
+            clearInterval(el.timer);
+            if(fn) fn.call(el);
+        }
+
+    },30)
+}
