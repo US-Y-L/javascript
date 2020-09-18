@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义播放器控件</title>
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_2077512_3j003fqjqk9.css">
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #vd-wrap{
+            width:600px;
+            height:400px;
+            margin:50px auto;
+            position:relative;
+            overflow:hidden;
+            background:#000;
+        }
+        #vd-wrap video{
+            width:100%;
+            height:100%;
+        }
+        #vd-con{
+            width:100%;
+            height:40px;
+            position:absolute;
+            left:0;
+            bottom:-40px;
+            background:darkgray;
+            display:flex;
+            align-items:center;
+            justify-content:space-evenly;
+            transition:all .5s;
+            cursor:pointer;
+        }
+        .full-box{
+            width:300px;
+            height:10px;
+            background:#666;
+            border-radius:5px;
+            overflow:hidden;
+        }
+        .play-box{
+            height:10px;
+            background:darkorange;
+            width:0;
+        }
+    </style>
+    <script>
+        function fTime(time){
+            var h = parseInt(time / 3600);
+            var m = parseInt(time % 3600 / 60);
+            var s = parseInt(time % 60);
+
+            h = h >0 ? ""+h : "0" +h;
+            m = m > 9 ? "" +m : "0"+m;
+            s= s > 9 ? "" +s : "0" +s;
+            return h +":"+ m +":"+ s;
+        }
+        window.onload = function(){
+            var oDiv = document.getElementById("vd-wrap");
+            var video = oDiv.getElementsByTagName("video")[0];
+            var vCon = document.getElementById("vd-con");
+            var vPlay = vCon.getElementsByTagName("i")[0];
+            var fB = document.querySelector(".full-box");
+            var pB = document.querySelector(".play-box");
+            var pT = document.querySelector(".play-time");
+            var addV = vCon.getElementsByTagName("i")[1];
+            var redV = vCon.getElementsByTagName("i")[2];
+            var full = vCon.getElementsByTagName("i")[3];
+
+            oDiv.onmouseenter = function(){
+                vCon.style.bottom = "0";
+            }
+            oDiv.onmouseleave = function(){
+                vCon.style.bottom = "-40px";
+            }
+
+            //点击播放暂停
+            vPlay.onclick = function(){
+                if(video.paused){
+                    video.play();
+                    this.className = "iconfont icon-zanting"
+                }else{
+                    video.pause();
+                    this.className = "inconfont icon-arrow-";
+                }
+            }
+
+            //视频播放时获取时长
+            video.ontimeupdate = function(){
+                var allTime = fTime(video.duration);
+                var cur = fTime(video.currentTime);
+                pT.innerHTML = cur + "/"+ allTime;
+
+                var scale = video.currentTime/ video.duration;
+                pB.style.width = scale * fB.offsetWidth + "px";
+
+                if(video.ended){
+                    vPlay.className = "inconfont icon-arrow-";
+                    pB.style.width = 0;
+                    pT.innerHTML = "00:00:00 / " + fTime(video.duration);
+                }
+
+            }
+
+            //点击改变播放进度
+            fB.onmousedown = function(ev){
+                var ev = ev || event;
+                pB.style.width = ev.offsetX + "px";
+                var scale = ev.offsetX / fB.offsetWidth;
+                video.currentTime = video.duration * scale;
+                //拖动改变播放进度
+                document.onmousemove = function(ev){
+                    var ev = ev || event;
+                    var disX = ev.offsetX;
+                    if(disX >= fB.offsetWidth){
+                        disX = fB.offsetWidth;
+                    }else if(disX <= 0){
+                        disX = 0;
+                    }
+                    pB.style.width = disX +"px";
+                    var scale = pB.offsetWidth / fB.offsetWidth;
+                    video.currentTime = video.duration * scale;
+
+                    return false;
+                }
+                document.onmouseup = function(){
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                }
+            }
+
+            //音量加减
+            addV.onclick = function(){
+                var vol = video.volume * 100;
+                vol += 10;
+                if(vol >= 100){
+                    vol = 100;
+                }
+                video.volume = vol/100;
+            }
+
+            redV.onclick = function(){
+                var vol = video.volume * 100;
+                vol -= 10;
+                if(vol <= 0){
+                    vol = 0;
+                }
+                video.volume = vol / 100;
+            }
+
+            //点击全屏与取消全屏
+            var flag = true;
+            var timer = null;
+            full.onclick = function(){
+                if(flag){
+                    oDiv.requestFullscreen();
+                    oDiv.onmousemove = function(ev){
+                        clearTimeout(timer);
+                        oDiv.style.cursor = "default";
+                        vCon.style.bottom = 0;
+                        var ev = ev || event;
+                        var old = ev.offsetX + ev.offsetY;
+                        timer = setTimeout(function(){
+                            var now = ev.offsetX + ev.offsetY;
+                            if(old == now){
+                                oDiv.style.cursor = "none";
+                                vCon.style.bottom = "-40px";
+                            }
+                        },3000)
+                    }
+                }else{
+                    //chrome取消全屏
+                    document.webkitCancelFullScreen();
+                    clearTimeout(timer);
+                }
+                flag = !flag;
+            }
+
+
+            //实现拖动进度条控制播放，及显示音量
+
+        }
+    </script>
+</head>
+<body>
+    <div id="vd-wrap">
+        <video src="./media/微微.mp4"></video>
+        <div id="vd-con">
+            <i class="iconfont icon-arrow-"></i>
+            <div class="full-box">
+                <div class="play-box">
+
+                </div>
+            </div>
+            <div class="play-time">
+                00:00:00 / 00:00:00
+            </div>
+            <i class="iconfont icon-jia "></i>
+            <i class="iconfont icon-jian "></i>
+            <i class="iconfont icon-dashujukeshihuaico-"></i>
+        </div>        
+    </div>
+</body>
+</html>
