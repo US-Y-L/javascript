@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>input</title>
+    <style>
+        .check {
+            position: relative;
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border: 2px solid darkblue;
+            cursor: pointer;
+        }
+
+        input[type="checkbox"] {
+            width:12px;
+            height:12px;
+            opacity: 0;
+        }
+
+        input[type="checkbox"]:checked+i {
+            width: 12px;
+            height: 12px;
+            display: inline-block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: darkblue;
+        }
+
+        input[type="checkbox"]:checked+i:after {
+            content: '';
+            display: inline-block;
+            width: 5px;
+            height: 10px;
+            border-top: 2px solid #fff;
+            border-left: 2px solid #fff;
+            transform: rotate(220deg);
+            position: absolute;
+            left: 3px;
+            top: -1px;
+        }
+
+        .rad{
+            position: relative;
+            height:20px;
+            line-height: 20px;
+        }
+
+        input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            opacity: 0;
+            margin:0;
+        }
+
+        .rad span {
+            position: absolute;
+            left: 0;
+            top: -1px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1px solid #999;
+            box-sizing:border-box;
+            cursor:pointer;
+        }
+
+        
+        input[type="radio"]:checked+span {
+            border-color: darkorange;
+        }
+        input[type="radio"]:checked+span:after{
+            content:"";
+            display:block;
+            width:14px;
+            height:14px;
+            border-radius:50%;
+            position:absolute;
+            left:50%;
+            top:50%;
+            transform:translate(-50%,-50%);
+            background:darkorange;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <label class="check">
+        <input type="checkbox" value="like">
+        <i></i>
+    </label>
+    <label class="check">
+        <input type="checkbox" value="like">
+        <i></i>
+    </label>
+    <label class="check">
+        <input type="checkbox" value="like">
+        <i></i>
+    </label>
+    <br />
+
+    <label class="rad">
+        <input type="radio" name="test">
+        <span></span>
+        选项一
+    </label><br />
+    <label class="rad">
+        <input type="radio" name="test">
+        <span></span>
+        选项二
+    </label>
+</body>
+
+</html>
